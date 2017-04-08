@@ -1,5 +1,6 @@
 package in.vaibhav.com.firebasecloudmessaging;
 
+import android.content.Intent;
 import android.util.Log;
 
 import com.google.firebase.messaging.FirebaseMessagingService;
@@ -12,6 +13,7 @@ import com.google.firebase.messaging.RemoteMessage;
 public class myFirebaseMessagingServices extends FirebaseMessagingService {
 
     private static final String TAG = "fcmmessages";
+
 
     @Override
     public void onMessageReceived(RemoteMessage remoteMessage) {
@@ -31,9 +33,15 @@ public class myFirebaseMessagingServices extends FirebaseMessagingService {
         if (remoteMessage.getNotification() != null) {
             Log.d(TAG, "Message Notification Body: " + remoteMessage.getNotification().getBody());
         }
+        notifyuser(remoteMessage.getFrom(),remoteMessage.getNotification().getBody());
 
         // Also if you intend on generating your own notifications as a result of a received FCM
         // message, here is where that should be initiated. See sendNotification method below.
     }
 
+    public void notifyuser(String from,String notifaction){
+        MyNotificationManager myNotificationManager = new MyNotificationManager(getApplicationContext());
+        myNotificationManager.showNotification(from,notifaction,new Intent(getApplicationContext(),MainActivity.class));
+
+    }
 }

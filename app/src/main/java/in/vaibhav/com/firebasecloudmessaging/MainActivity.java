@@ -21,6 +21,8 @@ public class MainActivity extends AppCompatActivity {
     private BroadcastReceiver broadcastReceiver;
     private Button button;
     private String keyFromuser;
+    private DatabaseReference database = FirebaseDatabase.getInstance().getReference().child("FCM");
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -30,23 +32,15 @@ public class MainActivity extends AppCompatActivity {
         button = (Button) findViewById(R.id.submtBtn);
         textView = (TextView) findViewById(R.id.text);
 
-        final DatabaseReference database = FirebaseDatabase.getInstance().getReference().child("FCM");
-
         broadcastReceiver = new BroadcastReceiver() {
-
             @Override
             public void onReceive(Context context, Intent intent) {
-
                 textView.setText(SharedPrefManager.getInstance(MainActivity.this).getToken());
-
             }
         };
 
         if (SharedPrefManager.getInstance(this).getToken() != null) {
-
-
             textView.setText(SharedPrefManager.getInstance(this).getToken());
-
         }
         registerReceiver(broadcastReceiver, new IntentFilter(MyfirebaseInstanceServices.TOKEN_BROADCAST));
 
