@@ -1,3 +1,5 @@
 <resources>
     <string name="app_name">FirebaseCloudMessaging</string>
+    <string name="entr">Enter Your Unique No</string>
+    <string name="submit">Submit</string>
 </resources>
