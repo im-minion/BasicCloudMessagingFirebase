@@ -51,8 +51,6 @@ public class MainActivity extends AppCompatActivity {
                 database.child(keyFromuser).setValue(SharedPrefManager.getInstance(MainActivity.this).getToken());
             }
         });
-
-
     }
 
 
